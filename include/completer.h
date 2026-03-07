@@ -7,16 +7,23 @@
 
 namespace Mistercomplete {
 
-        class Completer : public ICompleter {
+template <typename T>
+class Completer : public ICompleter<T> {
+public:
+        Completer() {}
 
-        public:
-                Completer();
-                void add_entry(const int id, const std::string& text);
-                [[nodiscard]] std::vector<std::pair<int, std::string>> suggest(const std::string& text);
+        void add_entry(const T& id, const std::string& text) override
+        {
+                trie.insert(id, text);
+        }
 
-        private:
-                Trie trie;
+        [[nodiscard]] std::vector<std::pair<T, std::string>> suggest(const std::string& text) override
+        {
+                return trie.autocomplete(text);
+        }
 
-        };
+private:
+        Trie<T> trie;
+};
 
 } // end namespace Mistercomplete

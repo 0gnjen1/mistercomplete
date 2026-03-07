@@ -1,18 +1,23 @@
 #pragma once
+#include <optional>
 
 namespace Mistercomplete {
 
-        class Node {
+template <typename T>
+class Node {
+public:
+        Node* parent = nullptr;
+        char character = 0;
+        bool ending = false;
+        std::optional<T> id;
+        Node* children[26] = { nullptr };
 
-        public:
-                Node* parent;
-                char character;
-                bool ending = false;
-                int id = -1; 				// Represents the ID of the entry. Set to a positive value only if ending is true.
-                Node* children[26] = { nullptr }; 	// [0]-a, [1]-b, ...
-
-                int child_count();
-        
-        };
+        int child_count()
+        {
+                int count = 0;
+                for (int i = 0; i < 26; i++) count += (children[i] != nullptr);
+                return count;
+        }
+};
 
 } // end namespace Mistercomplete
