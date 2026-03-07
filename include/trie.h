@@ -20,8 +20,6 @@ namespace Mistercomplete {
                 std::vector<std::pair<int, std::string>> get_all_from_node(Node* node);
                 void get_all_from_node_recursive(Node* node, std::vector<std::pair<int, std::string>>& results, std::string& current_word);
 
-        friend class TestTrie;
-
         };
 
 } // end namespace Mistercomplete

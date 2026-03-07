@@ -28,24 +28,16 @@ node.o: ./src/node.cpp ./include/node.h
 lib:
 	@mkdir lib
 
-# Test Classes =====================================================================================================
-
-testtrie.o: ./test/testtrie.cpp ./test/testtrie.h
-	@echo " - Compiling testtrie.cpp"
-	@g++ $(WARNFLAG) -c ./test/testtrie.cpp -o ./test/testtrie.o
-
 # Testing =====================================================================================================
 
 test: testing.out
 	@echo " - Running tests"
 	@./test/testing.out
 
-testing.out: ./test/testing.o ./lib/mistercomplete.a ./test/testtrie.o
-	@g++ -c ./test/testing.cpp -o ./test/testing.o
-	@g++ ./test/testing.o ./test/testtrie.o $(STATIC_OPTION) ./lib/mistercomplete.a -o ./test/testing.out
-
-testing.o: ./test/testing.cpp
-	@g++ $(WARNFLAG) -c ./test/testing.cpp -o ./testing/testing.o
+testing.out: ./lib/mistercomplete.a
+	@echo " - Compiling testing.cpp"
+	@g++ $(WARNFLAG) -c ./test/testing.cpp -o ./test/testing.o
+	@g++ ./test/testing.o $(STATIC_OPTION) ./lib/mistercomplete.a -o ./test/testing.out
 
 # Clean =====================================================================================================
 
