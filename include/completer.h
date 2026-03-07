@@ -3,10 +3,11 @@
 #include <string>
 #include <utility>
 #include "trie.h"
+#include "icompleter.h"
 
 namespace Mistercomplete {
 
-        class Completer {
+        class Completer : public ICompleter {
 
         public:
                 Completer();
